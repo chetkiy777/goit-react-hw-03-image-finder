@@ -4,7 +4,7 @@ export default class Loader extends React.Component {
   render() {
     return (
       <div>
-        <img src="../../img/126" alt="loader" />
+        <img src="" alt="loader" />
       </div>
     );
   }
