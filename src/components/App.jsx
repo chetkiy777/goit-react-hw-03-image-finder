@@ -11,21 +11,37 @@ export class App extends React.Component {
     searchInput: '',
   };
 
-  componentDidMount(prevState, prevProps) {
-    pixabayApi.query = this.searchInput;
+  // componentDidMount() {
+  //   this.getImagesFromApi().then(console.log);
+  // }
 
-    pixabayApi.getImagesFromApiByName().then(imgArr => {
-      if (this.state.imgArr !== prevState.imgArr) {
-        this.setState({ imgArr });
-      }
-    });
+  getImagesFromApi = () => {
+    pixabayApi.query = this.state.searchInput;
+
+    pixabayApi
+      .getImagesFromApiByName()
+      .then(hits => {
+        this.setState({ imgArr: hits });
+      })
+      .catch(error => console.log(error));
+  };
+
+  onInputFormSubmit = query => {
+    this.setState({ searchInput: query });
+  };
+
+  componentDidUpdate() {
+    this.getImagesFromApi();
   }
 
   render() {
     return (
       <div>
-        <Searchbar />
-        <ImageGallery imgArr={this.state.imgArr} />
+        <Searchbar
+          searchInput={this.state.searchInput}
+          onFormSubmit={this.onInputFormSubmit}
+          onInputChange={this.onInputFormChange}
+        />
       </div>
     );
   }
