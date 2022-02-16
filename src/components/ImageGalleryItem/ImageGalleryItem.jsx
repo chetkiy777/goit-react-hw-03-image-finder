@@ -1,7 +1,14 @@
-const ImageGalleryItem = ({ img, path, id }) => {
+import styles from './styles.module.css';
+
+const ImageGalleryItem = ({ path, id, largeimg }) => {
   return (
-    <li key={id}>
-      <img src={path} alt="image-item" />
+    <li id={id} className={styles.ImageGalleryItem}>
+      <img
+        className={styles.ImageGalleryItemIMG}
+        src={path}
+        alt="imagItem"
+        largeimg={largeimg}
+      />
     </li>
   );
 };

@@ -33,6 +33,8 @@ export default class PixabayApi {
       .get(
         `?q=${this.searchQuery}&page=${this.page}&key=${this._apiKey}&image_type=photo&orientation=horizontal&per_page=12`
       )
-      .then(response => response.data.hits);
+      .then(response => {
+        return response.data.hits;
+      });
   }
 }

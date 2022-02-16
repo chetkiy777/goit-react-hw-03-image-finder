@@ -3,45 +3,52 @@ import Loader from './Loader/Loader';
 import Searchbar from './Searchbar/Searchbar';
 import PixabayApi from 'API/pixabayApi';
 import ImageGallery from './ImageGallery/ImageGallery';
+import Button from './Button/Button';
+import styles from './styles.module.css';
 const pixabayApi = new PixabayApi();
 
 export class App extends React.Component {
   state = {
     imgArr: [],
     searchInput: '',
+    isLoading: false,
   };
 
   // componentDidMount() {
-  //   this.getImagesFromApi().then(console.log);
+  //   this.getImagesFromApi();
   // }
 
   getImagesFromApi = () => {
-    pixabayApi.query = this.state.searchInput;
+    if (!this.state.imgArr) {
+      return;
+    }
 
+    pixabayApi.query = this.state.searchInput.value;
     pixabayApi
       .getImagesFromApiByName()
       .then(hits => {
-        this.setState({ imgArr: hits });
+        this.setState({ imgArr: [...this.state.imgArr, ...hits] });
       })
       .catch(error => console.log(error));
   };
 
-  onInputFormSubmit = query => {
-    this.setState({ searchInput: query });
+  loadMore = () => {
+    pixabayApi.incrementPage();
+    this.getImagesFromApi();
   };
 
-  componentDidUpdate() {
+  onInputFormSubmit = value => {
+    this.setState({ searchInput: value });
     this.getImagesFromApi();
-  }
+  };
 
   render() {
     return (
-      <div>
-        <Searchbar
-          searchInput={this.state.searchInput}
-          onFormSubmit={this.onInputFormSubmit}
-          onInputChange={this.onInputFormChange}
-        />
+      <div className={styles.App}>
+        <Searchbar onFormSubmit={this.onInputFormSubmit} />
+        {this.state.isLoading && <Loader />}
+        <ImageGallery imgArr={this.state.imgArr} />
+        {this.state.imgArr.length !== 0 && <Button loadMore={this.loadMore} />}
       </div>
     );
   }

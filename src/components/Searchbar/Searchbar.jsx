@@ -1,30 +1,47 @@
-const Searchbar = props => {
-  let { onFormSubmit } = props;
+import styles from './styles.module.css';
+import { ImSearch } from 'react-icons/im';
+import React from 'react';
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const value = e.currentTarget.searchQuery.value;
-    onFormSubmit(value);
+export default class Searchbar extends React.Component {
+  state = {
+    inputValue: '',
   };
 
-  return (
-    <header className="searchbar">
-      <form className="form" onSubmit={handleSubmit}>
-        <button type="submit" className="button">
-          <span className="button-label">Search</span>
-        </button>
+  onInputChange = e => {
+    this.setState({ inputValue: e.currentTarget.value });
+    console.log(this.state.inputValue);
+  };
 
-        <input
-          className="input"
-          type="text"
-          autoComplete="off"
-          autoFocus="off"
-          placeholder="Search images and photos"
-          name="searchQuery"
-        />
-      </form>
-    </header>
-  );
-};
+  handleSubmit = e => {
+    e.preventDefault();
+    const value = e.target.query.value;
+    this.props.onFormSubmit(value);
+  };
 
-export default Searchbar;
+  render() {
+    return (
+      <header className={styles.Searchbar}>
+        <form
+          action="/"
+          className={styles.SearchForm}
+          onSubmit={this.handleSubmit}
+        >
+          <button type="submit" className={styles.SearchFormButton}>
+            <ImSearch />
+          </button>
+
+          <input
+            className={styles.SearchFormInput}
+            type="text"
+            autoComplete="off"
+            autoFocus="off"
+            placeholder="Search images and photos"
+            name="query"
+            value={this.state.inputValue}
+            onChange={e => this.onInputChange(e)}
+          />
+        </form>
+      </header>
+    );
+  }
+}
