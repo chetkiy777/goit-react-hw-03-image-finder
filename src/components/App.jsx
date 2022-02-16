@@ -14,32 +14,29 @@ export class App extends React.Component {
     isLoading: false,
   };
 
-  // componentDidMount() {
-  //   this.getImagesFromApi();
-  // }
-
   getImagesFromApi = () => {
-    if (!this.state.imgArr) {
-      return;
-    }
+    pixabayApi.resetPage();
 
-    pixabayApi.query = this.state.searchInput.value;
     pixabayApi
-      .getImagesFromApiByName()
+      .getImagesFromApi()
       .then(hits => {
-        this.setState({ imgArr: [...this.state.imgArr, ...hits] });
+        this.setState({ imgArr: [...hits] });
       })
       .catch(error => console.log(error));
   };
 
   loadMore = () => {
     pixabayApi.incrementPage();
-    this.getImagesFromApi();
+    pixabayApi.getImagesFromApiByName().then(hits => {
+      this.setState({ imgArr: [...this.state.imgArr, ...hits] });
+    });
   };
 
-  onInputFormSubmit = value => {
-    this.setState({ searchInput: value });
-    this.getImagesFromApi();
+  onInputFormSubmit = query => {
+    pixabayApi.query = query;
+    pixabayApi.getImagesFromApiByName().then(hits => {
+      this.setState({ imgArr: [...hits] });
+    });
   };
 
   render() {

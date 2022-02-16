@@ -2,30 +2,25 @@ import styles from './styles.module.css';
 import { ImSearch } from 'react-icons/im';
 import React from 'react';
 
-export default class Searchbar extends React.Component {
+class Searchbar extends React.Component {
   state = {
     inputValue: '',
   };
 
   onInputChange = e => {
     this.setState({ inputValue: e.currentTarget.value });
-    console.log(this.state.inputValue);
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const value = e.target.query.value;
-    this.props.onFormSubmit(value);
+    let data = e.currentTarget.query.value;
+    this.props.onFormSubmit(data);
   };
 
   render() {
     return (
       <header className={styles.Searchbar}>
-        <form
-          action="/"
-          className={styles.SearchForm}
-          onSubmit={this.handleSubmit}
-        >
+        <form className={styles.SearchForm} onSubmit={this.handleSubmit}>
           <button type="submit" className={styles.SearchFormButton}>
             <ImSearch />
           </button>
@@ -45,3 +40,5 @@ export default class Searchbar extends React.Component {
     );
   }
 }
+
+export default Searchbar;
