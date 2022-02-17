@@ -1,13 +1,13 @@
 import styles from './styles.module.css';
 
-const ImageGalleryItem = ({ path, id, largeimg }) => {
+const ImageGalleryItem = ({ path, id, showModal }) => {
   return (
     <li id={id} className={styles.ImageGalleryItem}>
       <img
         className={styles.ImageGalleryItemIMG}
         src={path}
         alt="imagItem"
-        largeimg={largeimg}
+        onClick={showModal}
       />
     </li>
   );

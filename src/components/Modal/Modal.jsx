@@ -1,8 +1,8 @@
-const Modal = () => {
+const Modal = ({ path }) => {
   return (
     <div className="overlay">
       <div className="modal">
-        <img src="" alt="" />
+        <img src="" alt="largeImage" />
       </div>
     </div>
   );
