@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './styles.module.css';
 import { ImSpinner } from 'react-icons/im';
-import PropTypes from 'prop-types';
 
 class Loader extends React.Component {
   render() {

@@ -20,6 +20,8 @@ const ImageGalleryItem = ({ path, id, largeImage, setLargeUrl }) => {
 ImageGalleryItem.propTypes = {
   path: PropTypes.string,
   id: PropTypes.number,
+  largeImage: PropTypes.string,
+  setLargeUrl: PropTypes.func,
 };
 
 export default ImageGalleryItem;

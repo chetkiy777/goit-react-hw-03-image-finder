@@ -23,11 +23,15 @@ class Modal extends React.Component {
   render() {
     return createPortal(
       <div className={styles.Overlay}>
-        <img className={styles.Modal} src={this.props.largeImage} alt="image" />
+        <img className={styles.Modal} src={this.props.largeImage} alt="" />
       </div>,
       modalRoot
     );
   }
 }
+
+Modal.propTypes = {
+  onClose: PropTypes.func,
+};
 
 export default Modal;
