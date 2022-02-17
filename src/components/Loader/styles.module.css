@@ -1,4 +1,12 @@
+.loaderContainer {
+  margin: 0 auto;
+}
+
 .loader {
   display: inline-block;
-  width: 50px;
+}
+
+.text {
+  font-size: 20px;
+  font-weight: 700;
 }

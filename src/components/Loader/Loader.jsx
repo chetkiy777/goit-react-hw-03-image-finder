@@ -1,14 +1,17 @@
 import React from 'react';
-import logo from '../../img/dekorLogo.png';
 import styles from './styles.module.css';
+import { ImSpinner } from 'react-icons/im';
+import PropTypes from 'prop-types';
 
-export default class Loader extends React.Component {
+class Loader extends React.Component {
   render() {
     return (
-      <div>
-        <img className={styles.loader} src={logo} alt="logo" />
-        <span>Загрузка ... </span>
+      <div className={styles.loaderContainer}>
+        <ImSpinner size="32" className="icon-spin" />
+        <span className={styles.text}>Загрузка ... </span>
       </div>
     );
   }
 }
+
+export default Loader;

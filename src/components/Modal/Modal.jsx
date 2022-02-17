@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Modal = ({ path }) => {
   return (
     <div className="overlay">
@@ -6,6 +8,10 @@ const Modal = ({ path }) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  path: PropTypes.string,
 };
 
 export default Modal;

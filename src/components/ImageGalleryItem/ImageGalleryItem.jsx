@@ -1,4 +1,5 @@
 import styles from './styles.module.css';
+import PropTypes from 'prop-types';
 
 const ImageGalleryItem = ({ path, id, showModal }) => {
   return (
@@ -11,6 +12,12 @@ const ImageGalleryItem = ({ path, id, showModal }) => {
       />
     </li>
   );
+};
+
+ImageGalleryItem.propTypes = {
+  path: PropTypes.string,
+  id: PropTypes.number,
+  showModal: PropTypes.func,
 };
 
 export default ImageGalleryItem;
