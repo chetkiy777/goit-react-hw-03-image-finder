@@ -15,20 +15,23 @@ export class App extends React.Component {
     imgArr: [],
     searchInput: '',
     isLoading: false,
-    modalShow: false,
-    largePath: '',
+    showModal: false,
+    largeImage: '',
   };
 
   toggleLoader = () => {
     this.setState({ isLoading: !this.state.isLoading });
   };
 
-  showModal = () => {
-    this.setState({ modalShow: true });
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
   };
 
-  hideModal = () => {
-    this.setState({ toggleModal: false });
+  setLargeUrl = url => {
+    this.setState({ largeImage: url });
+    this.toggleModal();
   };
 
   getImagesFromApi = () => {
@@ -66,16 +69,23 @@ export class App extends React.Component {
   };
 
   render() {
+    const { showModal, isLoading } = this.state;
     return (
       <div className={styles.App}>
         <Searchbar onFormSubmit={this.onInputFormSubmit} />
-        <ImageGallery imgArr={this.state.imgArr} showModal={this.showModal} />
+        <ImageGallery
+          imgArr={this.state.imgArr}
+          setLargeUrl={this.setLargeUrl}
+        />
         {this.state.imgArr.length !== 0 && <Button loadMore={this.loadMore} />}
-        {this.state.modalShow === true && (
-          <Modal hideModal={this.hideModal} path={this.state.path} />
-        )}
-        {this.state.isLoading && <Loader />}
+        {isLoading && <Loader />}
         <ToastContainer autoClose={3000} />
+        {showModal && (
+          <Modal
+            onClose={this.toggleModal}
+            largeImage={this.state.largeImage}
+          />
+        )}
       </div>
     );
   }

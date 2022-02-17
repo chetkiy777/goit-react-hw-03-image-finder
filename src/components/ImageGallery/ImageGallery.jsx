@@ -1,8 +1,8 @@
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import styles from './styles.module.css';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
-const ImageGallery = ({ imgArr, showModal }) => {
+const ImageGallery = ({ imgArr, setLargeUrl }) => {
   return (
     <ul className={styles.ImageGallery}>
       {imgArr.map(({ id, previewURL, largeImageURL }) => (
@@ -10,8 +10,8 @@ const ImageGallery = ({ imgArr, showModal }) => {
           key={id}
           id={id}
           path={previewURL}
-          largeimg={largeImageURL}
-          showModal={showModal}
+          largeImage={largeImageURL}
+          setLargeUrl={setLargeUrl}
         />
       ))}
     </ul>
@@ -19,7 +19,6 @@ const ImageGallery = ({ imgArr, showModal }) => {
 };
 
 ImageGallery.propTypes = {
-  showModal: PropTypes.func,
-  imgArr: PropTypes.arrayOf(PropTypes.shape)
-}
+  imgArr: PropTypes.arrayOf(PropTypes.shape),
+};
 export default ImageGallery;
