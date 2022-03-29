@@ -61,6 +61,7 @@ export class App extends React.Component {
       return;
     }
     pixabayApi.query = query;
+    pixabayApi.resetPage();
     this.toggleLoader();
     pixabayApi.getImagesFromApiByName().then(hits => {
       this.setState({ imgArr: [...hits] });
